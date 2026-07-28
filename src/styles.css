@@ -4,6 +4,29 @@
     padding: 0;
 }
 
+.overlay{
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    background-color: rgba(0,0,0, 0.5);
+    width: 100vw;
+    height: 100vh;
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal{
+    margin: auto;
+    width: 300px;
+    height: 600px;
+
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 12px;
+}
 
 body{
     height: 100vh;
@@ -16,6 +39,7 @@ header{
     height: 10%;
     padding: 1rem 1.5rem;
     display: flex;
+    border: 2px solid black;
 
     align-items: center;
     gap: 2rem;
@@ -26,11 +50,59 @@ main{
     display: flex;
 }
 
+table{
+    
+    text-align: left;
+    border: 2px solid black;
+    border-radius: 5px 5px 0 0;
+    padding: 12px 8px;
+}
+
+th{
+    margin-bottom: 1.2rem;
+}
+
+tr:nth-child(2n){
+    background-color: gray;
+}
+
+button{
+    transition: transform 0.1s;
+    padding: 12px 16px;
+    font-weight: bold;
+
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 15px;
+}
+
+button:hover{
+    color: white;
+    background-color: black;
+
+    transform: scale(1.2);
+}
+
+.addToDo{
+    margin-top: 40px;
+}
+
 #projects{
-    width: 35%;
+    width: 20%;
+    border-right: 2px solid black;
+
+    display: flex;
+    flex-flow: column wrap;
+    gap: 12px;
+    padding: 35px auto;
 }
 #toDoLists{
-    width: 65%;
+    width: 80%;
+    padding-top: 35px;
+
+    display: flex;
+    justify-content: center;
+
 }
 
 .static-gif{
@@ -40,4 +112,24 @@ main{
 
 .static-gif:hover{
     opacity: 0;
+}
+
+.name{
+    width: 600px;
+}
+
+.project{
+    width: 150px;
+}
+
+.prio{
+    width: 100px;
+}
+
+.status{
+    width: 100px;
+}
+
+.form{
+    padding: 35px 20px;
 }
