@@ -20,8 +20,8 @@
 
 .modal{
     margin: auto;
-    width: 300px;
-    height: 600px;
+    width: 400px;
+    height: 700px;
 
     background-color: white;
     border: 2px solid black;
@@ -39,7 +39,7 @@ header{
     height: 10%;
     padding: 1rem 1.5rem;
     display: flex;
-    border: 2px solid black;
+    border-bottom: 2px solid black;
 
     align-items: center;
     gap: 2rem;
@@ -50,21 +50,60 @@ main{
     display: flex;
 }
 
+#projects{
+    width: 20%;
+    border-right: 2px solid black;
+
+    display: flex;
+    flex-flow: column wrap;
+    gap: 12px;
+    padding: 35px;
+}
+#toDoLists{
+    width: 80%;
+    padding-top: 35px;
+
+    display: flex;
+    justify-content: center;
+
+}
+
+@media (max-width: 800px) {
+    main {
+        flex-direction: column;
+    }
+
+    #projects{
+        height: auto;
+        width: 100%;
+        border-bottom: 2px solid black;
+        border-right: none;
+    }
+
+    #toDoLists{
+        height: auto;
+        width: 100%;
+    }
+}
+
 table{
-    
+    border-collapse: separate;
+    border-spacing: 0;
     text-align: left;
     border: 2px solid black;
-    border-radius: 5px 5px 0 0;
     padding: 12px 8px;
+    border-radius: 5px;
 }
 
-th{
-    margin-bottom: 1.2rem;
+td{
+    padding: 0.8rem;
 }
 
-tr:nth-child(2n){
-    background-color: gray;
+tr:first-child th{
+    padding: 1rem;
+    border-bottom: 2px solid grey;
 }
+
 
 button{
     transition: transform 0.1s;
@@ -87,24 +126,6 @@ button:hover{
     margin-top: 40px;
 }
 
-#projects{
-    width: 20%;
-    border-right: 2px solid black;
-
-    display: flex;
-    flex-flow: column wrap;
-    gap: 12px;
-    padding: 35px auto;
-}
-#toDoLists{
-    width: 80%;
-    padding-top: 35px;
-
-    display: flex;
-    justify-content: center;
-
-}
-
 .static-gif{
     position: absolute;
     background: white;
@@ -115,10 +136,14 @@ button:hover{
 }
 
 .name{
-    width: 600px;
+    width: 15vw;
 }
 
 .project{
+    width: 150px;
+}
+
+.deadline{
     width: 150px;
 }
 
@@ -130,6 +155,15 @@ button:hover{
     width: 100px;
 }
 
-.form{
-    padding: 35px 20px;
+.toDoForm{
+    padding: 45px 40px;
+
+    display: flex;
+    flex-flow: column wrap;
+    gap: 12px;
+}
+
+.toDoForm > div{
+    display: flex;
+    flex-direction: column;
 }

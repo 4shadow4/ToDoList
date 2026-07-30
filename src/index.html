@@ -13,7 +13,9 @@
         <h1>To Do List</h1>
     </header>
     <main>
-        <div id="projects"> </div>
+        <div id="projects"> 
+            <h1>Projects</h1>
+        </div>
         <div id="toDoLists">
 
             <div>
@@ -25,13 +27,15 @@
                         <col class="prio">
                         <col class="Status">
                     </colgroup>
-                    <tr>
-                        <th>Name</th>
-                        <th>Project</th>
-                        <th>Deadline</th>
-                        <th>Prio</th>
-                        <th>Status</th>
-                    </tr>
+                    <tbody class="tableBody">
+                        <tr>
+                            <th>Name</th>
+                            <th>Project</th>
+                            <th>Deadline</th>
+                            <th>Prio</th>
+                            <th>Status</th>
+                        </tr>
+                    </tbody>
                 
                 </table>
                 <button class="addToDo">Add ToDo</button>
@@ -43,7 +47,29 @@
     <div class="overlay">
         <div class="modal">
 
-            <form action="post" class="form">
+            <form action="post" class="toDoForm">
+                <div>
+                    <label for="toDo">ToDo:</label>
+                    <input type="text" id="toDo" name="toDo" required>
+                </div>
+                <div>
+                    <label for="project">Project:</label>
+                    <select name="project" id="project">
+
+                    </select>
+                </div>
+                <div>
+                    <label for="deadline">Deadline:</label>
+                    <input type="date" id="deadline" name="deadline" required>
+                </div>
+                <div>
+                    <label for="prio">
+                        Priorität:
+                        <span id="rangeValue">5</span>
+                    </label>
+                    <input type="range" id="prio" name="prio" min="1" max="10" step="1" value="5">
+                </div>
+    
                 <button type="submit">Submit</button>
             </form>
 
