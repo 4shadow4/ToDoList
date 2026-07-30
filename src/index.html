@@ -15,17 +15,18 @@
     <main>
         <div id="projects"> 
             <h1>Projects</h1>
+            <button id="createProjectButton">Create Project</button>
         </div>
         <div id="toDoLists">
 
             <div>
                 <table class="toDoTable">
                     <colgroup>
-                        <col class="name">
-                        <col class="project">
-                        <col class="deadline">
-                        <col class="prio">
-                        <col class="Status">
+                        <col class="nameT">
+                        <col class="projectT">
+                        <col class="deadlineT">
+                        <col class="prioT">
+                        <col class="StatusT">
                     </colgroup>
                     <tbody class="tableBody">
                         <tr>
@@ -47,7 +48,7 @@
     <div class="overlay">
         <div class="modal">
 
-            <form action="post" class="toDoForm">
+            <form action="post" id="toDoForm">
                 <div>
                     <label for="toDo">ToDo:</label>
                     <input type="text" id="toDo" name="toDo" required>
@@ -70,6 +71,13 @@
                     <input type="range" id="prio" name="prio" min="1" max="10" step="1" value="5">
                 </div>
     
+                <button type="submit">Submit</button>
+            </form>
+            <form action="post" id="projectForm">
+                <div>
+                    <label for="projectName">Name of Project</label>
+                    <input type="text" id="projectName" name="projectName" required>
+                </div>
                 <button type="submit">Submit</button>
             </form>
 

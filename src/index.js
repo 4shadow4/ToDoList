@@ -1,9 +1,12 @@
 import "./styles.css";
 
-const form = document.querySelector('.toDoForm')
+const toDoForm = document.getElementById('toDoForm')
+const projectForm = document.getElementById('projectForm')
 const overlay = document.querySelector('.overlay');
-const project = document.getElementById('project');
+const projectToDo = document.getElementById('project');
 let toDos = [];
+let projects = [];
+
 
 const toDo = {
     startToDoForm(){
@@ -11,12 +14,13 @@ const toDo = {
 
         addToDo.addEventListener('click', () => {
             showOverlay()
-            if(project.children.length === 0){
+            showForm(toDoForm);
+            if(projectToDo.children.length === 0){
                 const filler = document.createElement('option');
                 filler.value = "No Project";
                 filler.textContent = "No Project Yet!"
 
-                project.appendChild(filler)
+                projectToDo.appendChild(filler)
             }
         });
     },
@@ -45,18 +49,65 @@ const toDo = {
 }
 toDo.startToDoForm();
 
-form.addEventListener('submit', (event) => {
-    event.preventDefault();
+const project = {
+    startProjectForm(){
+        const addProject = document.getElementById('createProjectButton');
 
-    const formData = new FormData(form);
-    const toDoData = Object.fromEntries(formData.entries());
+        addProject.addEventListener('click', () => {
+            showOverlay()
+            showForm(projectForm);
+        });
+    },
+    addProject(projectData){
+        const projectContainer = document.querySelector('#projects');
+        const accessProject = document.createElement('div');
 
-    hideOverlay();
-    project.innerHTML = '';
-    toDos.push(toDoData);
-    toDo.addToDo(toDoData);
-    form.reset();
+        accessProject.textContent = projectData.name;
+        accessProject.classList.add("project");
+
+        projectContainer.appendChild(accessProject);
+
+    },
+}
+project.startProjectForm();
+
+toDoForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(toDoForm);
+        toDoForm.reset();
+        const data = Object.fromEntries(formData.entries());
+        hideOverlay();
+        projectToDo.innerHTML = '';
+        toDos.push(data);
+        toDo.addToDo(data);
+
 });
+
+projectForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(projectForm);
+        projectForm.reset();
+        const data = Object.fromEntries(formData.entries());
+        hideOverlay();
+        projects.push(data);
+        project.addProject(data);
+        
+
+});
+
+
+function showForm(form){
+    if(form === toDoForm){
+        toDoForm.style.display = "flex";
+        projectForm.style.display = "none";
+    } else {
+        projectForm.style.display = "flex";
+        toDoForm.style.display = "none";
+    }
+
+}
 
 
 function hideOverlay(){

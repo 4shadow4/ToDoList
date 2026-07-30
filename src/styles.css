@@ -21,7 +21,7 @@
 .modal{
     margin: auto;
     width: 400px;
-    height: 700px;
+    height: auto;
 
     background-color: white;
     border: 2px solid black;
@@ -135,27 +135,27 @@ button:hover{
     opacity: 0;
 }
 
-.name{
+.nameT{
     width: 15vw;
 }
 
-.project{
+.projectT{
     width: 150px;
 }
 
-.deadline{
+.deadlineT{
     width: 150px;
 }
 
-.prio{
+.prioT{
     width: 100px;
 }
 
-.status{
+.statusT{
     width: 100px;
 }
 
-.toDoForm{
+form{
     padding: 45px 40px;
 
     display: flex;
@@ -166,4 +166,8 @@ button:hover{
 .toDoForm > div{
     display: flex;
     flex-direction: column;
+}
+
+.project{
+    width: max(70%, 100px);
 }
