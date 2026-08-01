@@ -1,4 +1,7 @@
 import "./styles.css";
+import deleteImageSRC from "../Images/icons8-löschen-50.png";
+import deleteGifSRC from "../Images/icons8-löschen.gif"
+
 
 const toDoForm = document.getElementById('toDoForm')
 const projectForm = document.getElementById('projectForm')
@@ -15,7 +18,14 @@ const toDo = {
         addToDo.addEventListener('click', () => {
             showOverlay()
             showForm(toDoForm);
-            if(projectToDo.children.length === 0){
+            for(const project of projects){
+                const projectOption = document.createElement('option');
+                projectOption.textContent = project;
+                projectOption.value = project;
+
+                projectToDo.appendChild(projectOption);
+            }
+            if(projects.length === 0){
                 const filler = document.createElement('option');
                 filler.value = "No Project";
                 filler.textContent = "No Project Yet!"
@@ -24,32 +34,13 @@ const toDo = {
             }
         });
     },
-    addToDo(toDoData){
-        const toDoTable = document.querySelector('.tableBody');
-        const tableRow = document.createElement('tr');
-
-        for(const data in toDoData){
-            const tableData = document.createElement('td');
-
-            tableData.textContent = toDoData[data];
-            tableRow.appendChild(tableData);
-        }
-
-        const checkboxCell = document.createElement('td');
-        const checkbox = document.createElement('input');
-        checkbox.type = "checkbox";
-        checkboxCell.appendChild(checkbox)
-        tableRow.appendChild(checkboxCell)
-
-        toDos[toDos.length - 1].status = 0;
-
-
-        toDoTable.appendChild(tableRow);
+    addToDo(){
+        renderTable();
     },
 }
 toDo.startToDoForm();
 
-const project = {
+const projectObject = {
     startProjectForm(){
         const addProject = document.getElementById('createProjectButton');
 
@@ -59,17 +50,21 @@ const project = {
         });
     },
     addProject(projectData){
-        const projectContainer = document.querySelector('#projects');
-        const accessProject = document.createElement('div');
+        const projectContainer = document.getElementById('projects');
+        const accessProject = document.createElement('button');
 
-        accessProject.textContent = projectData.name;
+        accessProject.textContent = projectData["projectName"];
         accessProject.classList.add("project");
+
+        accessProject.addEventListener('click', () => {
+            renderTable(accessProject.textContent);
+        });
 
         projectContainer.appendChild(accessProject);
 
     },
 }
-project.startProjectForm();
+projectObject.startProjectForm();
 
 toDoForm.addEventListener('submit', (event) => {
         event.preventDefault();
@@ -79,8 +74,11 @@ toDoForm.addEventListener('submit', (event) => {
         const data = Object.fromEntries(formData.entries());
         hideOverlay();
         projectToDo.innerHTML = '';
+        
         toDos.push(data);
-        toDo.addToDo(data);
+        toDos[toDos.length - 1].status = 0;
+
+        toDo.addToDo();
 
 });
 
@@ -91,8 +89,8 @@ projectForm.addEventListener('submit', (event) => {
         projectForm.reset();
         const data = Object.fromEntries(formData.entries());
         hideOverlay();
-        projects.push(data);
-        project.addProject(data);
+        projects.push(data["projectName"]);
+        projectObject.addProject(data);
         
 
 });
@@ -111,12 +109,95 @@ function showForm(form){
 
 
 function hideOverlay(){
-        overlay.style.display = "none";
+    toDoForm.reset();
+    projectForm.reset();
+    overlay.style.display = "none";
 };
 function showOverlay(){
     overlay.style.display = "flex";
 }
 overlay.addEventListener('click', (event) => (event.target === overlay)? hideOverlay():null );
+
+function renderTable(filter = null){
+
+    const toDoTable = document.querySelector('.tableBody');
+    toDoTable.innerHTML = `
+        <colgroup>
+            <col class="nameT">
+            <col class="projectT">
+            <col class="deadlineT">
+            <col class="prioT">
+            <col class="StatusT">
+        </colgroup>
+        <tbody class="tableBody">
+            <tr>
+                <th>Name</th>
+                <th>Project</th>
+                <th>Deadline</th>
+                <th>Prio</th>
+                <th>Status</th>
+            </tr>
+        </tbody>
+    `;
+
+    toDos.forEach((ellement, index) => {
+        
+        if(ellement.project === filter || filter === null){ 
+            const tableRow = document.createElement('tr');
+
+            for(const key in ellement){
+            
+                if(key === "status"){
+                    const checkboxCell = document.createElement('td');
+                    const checkbox = document.createElement('input');
+                    checkbox.type = "checkbox";
+                    checkbox.checked = ellement[key]
+
+                    checkboxCell.appendChild(checkbox)
+                    tableRow.appendChild(checkboxCell)
+                } else {
+                    const tableData = document.createElement('td');
+
+                    tableData.textContent = ellement[key];
+                    tableRow.appendChild(tableData);
+                }
+            
+                
+            }
+
+            const deleteButton = document.createElement('div');
+            const deleteImage = document.createElement('img');
+            const deleteGif = document.createElement('img');
+
+            deleteImage.src = deleteImageSRC;
+            deleteImage.classList.add('static-gif');
+            deleteGif.src = deleteGifSRC;
+
+            deleteButton.classList.add('deleteButton');
+            deleteButton.appendChild(deleteImage);
+            deleteButton.appendChild(deleteGif);
+            
+            tableRow.addEventListener('mouseenter', () => {
+                
+                tableRow.append(deleteButton);
+            });
+            tableRow.addEventListener('mouseleave', () => {
+
+                tableRow.removeChild(deleteButton);
+            });
+
+            deleteButton.addEventListener('click', () => {
+                toDos.splice(index, 1);
+                renderTable();
+            });
+            toDoTable.appendChild(tableRow);
+        }
+        
+    })
+
+    
+}
+
 
 
 ( () => {
@@ -127,7 +208,12 @@ overlay.addEventListener('click', (event) => (event.target === overlay)? hideOve
         prioOutput.textContent = prio.value;
     }); 
 
+    const seeAllToDos = document.getElementById('seeAllToDos');
+
+    seeAllToDos.addEventListener('click', () => {
+        renderTable();
+    });
+
 })();
 
-console.log(toDos);
 

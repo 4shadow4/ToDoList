@@ -57,7 +57,7 @@ main{
     display: flex;
     flex-flow: column wrap;
     gap: 12px;
-    padding: 35px;
+    padding: 36px;
 }
 #toDoLists{
     width: 80%;
@@ -95,6 +95,10 @@ table{
     border-radius: 5px;
 }
 
+tr{
+    position: relative;
+}
+
 td{
     padding: 0.8rem;
 }
@@ -102,6 +106,27 @@ td{
 tr:first-child th{
     padding: 1rem;
     border-bottom: 2px solid grey;
+}
+
+
+.deleteButton{
+    display: flex;
+    justify-content: flex-end;
+    position:absolute;
+    top: auto;
+    right: -100px;
+
+    height: auto;
+    width: 100px;
+    text-align: right;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+}
+
+.deleteButton:hover{
+    border: none;
+    background-color: transparent;
 }
 
 
