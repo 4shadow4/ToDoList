@@ -1,6 +1,7 @@
 import "./styles.css";
 import deleteImageSRC from "../Images/icons8-löschen-50.png";
-import deleteGifSRC from "../Images/icons8-löschen.gif"
+import deleteGifSRC from "../Images/icons8-löschen.gif";
+import editImageSRC from "../Images/icons8-neu-erstellen-64.png";
 
 
 const toDoForm = document.getElementById('toDoForm')
@@ -190,6 +191,48 @@ function renderTable(filter = null){
                 toDos.splice(index, 1);
                 renderTable();
             });
+            const editButton = document.createElement('div');
+            const editImage = document.createElement('img');
+
+            editImage.src = editImageSRC;
+
+            editButton.classList.add('editButton');
+            editButton.appendChild(editImage);
+            
+            tableRow.addEventListener('mouseenter', () => {
+                
+                tableRow.append(editButton);
+            });
+            tableRow.addEventListener('mouseleave', () => {
+
+                tableRow.removeChild(editButton);
+            });
+
+            editButton.addEventListener('click', () => {
+                showOverlay();
+                showForm(toDoForm);
+
+                const toDoEllement = document.getElementById('toDo');
+                const projectEllement = document.getElementById('project');
+                const deadlineEllement = document.getElementById('deadline');
+                const prioEllement = document.getElementById('prio');
+
+                toDoEllement.value = ellement.toDo;
+
+                const optionEllement = document.createElement('option');
+                optionEllement.value = ellement.project;
+                optionEllement.textContent = ellement.project;
+                projectEllement.appendChild(optionEllement); 
+
+                deadlineEllement.value = ellement.deadline;
+                prioEllement.value = ellement.prio;
+
+                toDos.splice(index, 1);
+                
+
+            });
+
+
             toDoTable.appendChild(tableRow);
         }
         

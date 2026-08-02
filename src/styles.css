@@ -129,6 +129,27 @@ tr:first-child th{
     background-color: transparent;
 }
 
+.editButton{
+    display: flex;
+    justify-content: flex-start;
+    position:absolute;
+    top: auto;
+    left: -100px;
+
+    height: 40px;
+    width: 100px;
+    text-align: right;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+
+    transition: transform 0.1s;
+}
+
+.editButton:hover{
+    transform: scale(1.2);
+}
+
 
 button{
     transition: transform 0.1s;
