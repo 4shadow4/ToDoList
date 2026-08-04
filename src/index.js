@@ -229,7 +229,20 @@ function renderTable(filter = null){
 
                 toDos.splice(index, 1);
                 
+                for(const project of projects){
+                    const projectOption = document.createElement('option');
+                    projectOption.textContent = project;
+                    projectOption.value = project;
 
+                    projectToDo.appendChild(projectOption);
+                }
+                if(projects.length === 0){
+                    const filler = document.createElement('option');
+                    filler.value = "No Project";
+                    filler.textContent = "No Project Yet!"
+
+                    projectToDo.appendChild(filler)
+                }
             });
 
 
