@@ -1,219 +1,219 @@
-*{
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.overlay{
-    position: fixed;
-    z-index: 100;
-    left: 0;
-    top: 0;
-    background-color: rgba(0,0,0, 0.5);
-    width: 100vw;
-    height: 100vh;
+.overlay {
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  height: 100vh;
 
-    display: none;
-    justify-content: center;
-    align-items: center;
+  display: none;
+  justify-content: center;
+  align-items: center;
 }
 
-.modal{
-    margin: auto;
-    width: 400px;
-    height: auto;
+.modal {
+  margin: auto;
+  width: 400px;
+  height: auto;
 
-    background-color: white;
-    border: 2px solid black;
-    border-radius: 12px;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 12px;
 }
 
-body{
-    height: 100vh;
+body {
+  height: 100vh;
 
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
-header{
-    height: 10%;
-    padding: 1rem 1.5rem;
-    display: flex;
-    border-bottom: 2px solid black;
+header {
+  height: 10%;
+  padding: 1rem 1.5rem;
+  display: flex;
+  border-bottom: 2px solid black;
 
-    align-items: center;
-    gap: 2rem;
+  align-items: center;
+  gap: 2rem;
 }
 
-main{
-    height: 90%;
-    display: flex;
+main {
+  height: 90%;
+  display: flex;
 }
 
-#projects{
-    width: 20%;
-    border-right: 2px solid black;
-
-    display: flex;
-    flex-flow: column wrap;
-    gap: 12px;
-    padding: 36px;
+#projects {
+  width: 20%;
+  border-right: 2px solid black;
+  padding: 36px;
 }
-#toDoLists{
-    width: 80%;
-    padding-top: 35px;
 
-    display: flex;
-    justify-content: center;
+#projects,
+#projectContainer {
+  display: flex;
+  flex-flow: column wrap;
+  gap: 12px;
+}
+#toDoLists {
+  width: 80%;
+  padding-top: 35px;
 
+  display: flex;
+  justify-content: center;
 }
 
 @media (max-width: 800px) {
-    main {
-        flex-direction: column;
-    }
-
-    #projects{
-        height: auto;
-        width: 100%;
-        border-bottom: 2px solid black;
-        border-right: none;
-    }
-
-    #toDoLists{
-        height: auto;
-        width: 100%;
-    }
-}
-
-table{
-    border-collapse: separate;
-    border-spacing: 0;
-    text-align: left;
-    border: 2px solid black;
-    padding: 12px 8px;
-    border-radius: 5px;
-}
-
-tr{
-    position: relative;
-}
-
-td{
-    padding: 0.8rem;
-}
-
-tr:first-child th{
-    padding: 1rem;
-    border-bottom: 2px solid grey;
-}
-
-
-.deleteButton{
-    display: flex;
-    justify-content: flex-end;
-    position:absolute;
-    top: auto;
-    right: -100px;
-
-    height: auto;
-    width: 100px;
-    text-align: right;
-    border: none;
-    background-color: transparent;
-    padding: 0;
-}
-
-.deleteButton:hover{
-    border: none;
-    background-color: transparent;
-}
-
-.editButton{
-    display: flex;
-    justify-content: flex-start;
-    position:absolute;
-    top: auto;
-    left: -100px;
-
-    height: 40px;
-    width: 100px;
-    text-align: right;
-    border: none;
-    background-color: transparent;
-    padding: 0;
-
-    transition: transform 0.1s;
-}
-
-.editButton:hover{
-    transform: scale(1.2);
-}
-
-
-button{
-    transition: transform 0.1s;
-    padding: 12px 16px;
-    font-weight: bold;
-
-    background-color: white;
-    border: 2px solid black;
-    border-radius: 15px;
-}
-
-button:hover{
-    color: white;
-    background-color: black;
-
-    transform: scale(1.2);
-}
-
-.addToDo{
-    margin-top: 40px;
-}
-
-.static-gif{
-    position: absolute;
-    background: white;
-}
-
-.static-gif:hover{
-    opacity: 0;
-}
-
-.nameT{
-    width: 15vw;
-}
-
-.projectT{
-    width: 150px;
-}
-
-.deadlineT{
-    width: 150px;
-}
-
-.prioT{
-    width: 100px;
-}
-
-.statusT{
-    width: 100px;
-}
-
-form{
-    padding: 45px 40px;
-
-    display: flex;
-    flex-flow: column wrap;
-    gap: 12px;
-}
-
-.toDoForm > div{
-    display: flex;
+  main {
     flex-direction: column;
+  }
+
+  #projects {
+    height: auto;
+    width: 100%;
+    border-bottom: 2px solid black;
+    border-right: none;
+  }
+
+  #toDoLists {
+    height: auto;
+    width: 100%;
+  }
 }
 
-.project{
-    width: max(70%, 100px);
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  text-align: left;
+  border: 2px solid black;
+  padding: 12px 8px;
+  border-radius: 5px;
+}
+
+tr {
+  position: relative;
+}
+
+td {
+  padding: 0.8rem;
+}
+
+tr:first-child th {
+  padding: 1rem;
+  border-bottom: 2px solid grey;
+}
+
+.deleteButton {
+  display: flex;
+  justify-content: flex-end;
+  position: absolute;
+  top: auto;
+  right: -100px;
+
+  height: auto;
+  width: 100px;
+  text-align: right;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+}
+
+.deleteButton:hover {
+  border: none;
+  background-color: transparent;
+}
+
+.editButton {
+  display: flex;
+  justify-content: flex-start;
+  position: absolute;
+  top: auto;
+  left: -100px;
+
+  height: 40px;
+  width: 100px;
+  text-align: right;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+
+  transition: transform 0.1s;
+}
+
+.editButton:hover {
+  transform: scale(1.2);
+}
+
+button {
+  transition: transform 0.1s;
+  padding: 12px 16px;
+  font-weight: bold;
+
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 15px;
+}
+
+button:hover {
+  color: white;
+  background-color: black;
+
+  transform: scale(1.2);
+}
+
+.addToDo {
+  margin-top: 40px;
+}
+
+.static-gif {
+  position: absolute;
+  background: white;
+}
+
+.static-gif:hover {
+  opacity: 0;
+}
+
+.nameT {
+  width: 15vw;
+}
+
+.projectT {
+  width: 150px;
+}
+
+.deadlineT {
+  width: 150px;
+}
+
+.prioT {
+  width: 100px;
+}
+
+.statusT {
+  width: 100px;
+}
+
+form {
+  padding: 45px 40px;
+
+  display: flex;
+  flex-flow: column wrap;
+  gap: 12px;
+}
+
+.toDoForm > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.project {
+  width: max(70%, 100px);
 }
