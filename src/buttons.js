@@ -30,4 +30,13 @@ function createEditButton() {
   return editButton;
 }
 
-export { createDeleteButton, createEditButton };
+function setTransitionDelay(element) {
+  element.addEventListener("mouseenter", () => {
+    element.style.transitionDelay = "0.1s";
+  });
+  element.addEventListener("mouseleave", () => {
+    element.style.transitionDelay = "0s";
+  });
+}
+
+export { createDeleteButton, createEditButton, setTransitionDelay };

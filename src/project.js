@@ -1,5 +1,9 @@
 import { showForm, hideOverlay, showOverlay } from "./forms.js";
-import { createDeleteButton, createEditButton } from "./buttons.js";
+import {
+  createDeleteButton,
+  createEditButton,
+  setTransitionDelay,
+} from "./buttons.js";
 import { renderToDo } from "./toDo.js";
 import deleteImageSRC from "../Images/icons8-löschen-50.png";
 import deleteGifSRC from "../Images/icons8-löschen.gif";
@@ -20,29 +24,31 @@ class project {
     this.projectID = crypto.randomUUID();
     this.name = name;
   }
-  editProject() {
+  editProject(element) {
     showOverlay();
     showForm(editProjectForm);
-    projectNameProjectForm.value = this.name;
-    projectIDFormE.value = this.projectID;
+    projectNameProjectForm.value = element.name;
+    projectIDFormE.value = element.projectID;
   }
-  deleteProject() {
+  deleteProject(project) {
     projects.forEach((element, index) => {
-      element.projectID === this.projectID ? projects.splice(index, 1) : null;
+      element.projectID === project.projectID
+        ? projects.splice(index, 1)
+        : null;
     });
     renderProjects();
   }
 }
 
 function addProject(projectData) {
+  console.log(projectData.projectName);
   const newProject = new project(projectData.projectName);
   projects.push(newProject);
-  initProjectList();
   renderProjects();
 }
 
 function initProjectList() {
-  projectSelectToDoForm.innerHTML = "";
+  projectSelectToDoForm.forEach((element) => (element.innerHTML = ""));
   if (projects.length === 0) {
     projectSelectToDoForm.forEach((element) => {
       const filler = document.createElement("option");
@@ -65,6 +71,9 @@ function initProjectList() {
 }
 
 function renderProjects() {
+  initProjectList();
+
+  projectContainer.innerHTML = "";
   projects.forEach((element, index) => {
     const projectButton = document.createElement("button");
     projectButton.classList.add("project");
@@ -75,6 +84,39 @@ function renderProjects() {
       renderToDo(element.name);
     });
 
+    setTransitionDelay(projectButton);
+
+    const editButton = createEditButton();
+    const deleteButton = createDeleteButton();
+
+    editButton.addEventListener("click", () => {
+      element.editProject(element);
+    });
+    deleteButton.addEventListener("click", () => {
+      element.deleteProject(element);
+    });
+
+    editButton.style.left = "auto";
+    editButton.style.right = "-110px";
+    editButton.style.top = "0px";
+
+    deleteButton.style.right = "-50px";
+    deleteButton.style.top = "0px";
+
+    projectButton.appendChild(editButton);
+    projectButton.appendChild(deleteButton);
+
+    editButton.style.opacity = "0";
+    deleteButton.style.opacity = "0";
+
+    projectButton.addEventListener("mouseenter", () => {
+      editButton.style.opacity = "1";
+      deleteButton.style.opacity = "1";
+    });
+    projectButton.addEventListener("mouseleave", () => {
+      editButton.style.opacity = "0";
+      deleteButton.style.opacity = "0";
+    });
     projectContainer.appendChild(projectButton);
   });
 }
@@ -93,11 +135,13 @@ function initProjectForms() {
   editProjectForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    const formData = new FormData(projectForm);
-    projectForm.reset();
+    const formData = new FormData(editProjectForm);
+    editProjectForm.reset();
     const Data = Object.fromEntries(formData.entries());
     hideOverlay();
 
+    console.log(project.projectID);
+    console.log(Data.projectID);
     projects.find((project) => project.projectID === Data.projectID).name =
       Data.editProjectName;
     renderProjects();

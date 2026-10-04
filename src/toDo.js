@@ -83,13 +83,17 @@ function renderToDo(filter = null) {
 
       const deleteButton = createDeleteButton();
       const editButton = createEditButton();
+
+      tableRow.append(deleteButton);
+      tableRow.append(editButton);
+
       tableRow.addEventListener("mouseenter", () => {
-        tableRow.append(deleteButton);
-        tableRow.append(editButton);
+        editButton.style.opacity = "1";
+        deleteButton.style.opacity = "1";
       });
       tableRow.addEventListener("mouseleave", () => {
-        tableRow.removeChild(deleteButton);
-        tableRow.removeChild(editButton);
+        editButton.style.opacity = "0";
+        deleteButton.style.opacity = "0";
       });
 
       deleteButton.addEventListener("click", () => {

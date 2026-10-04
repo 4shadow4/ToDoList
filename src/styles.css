@@ -110,19 +110,30 @@ tr:first-child th {
   border-bottom: 2px solid grey;
 }
 
-.deleteButton {
+.deleteButton,
+.editButton {
   display: flex;
   justify-content: flex-end;
   position: absolute;
   top: auto;
-  right: -100px;
 
-  height: auto;
-  width: 100px;
+  height: 100%;
+  width: auto;
   text-align: right;
   border: none;
   background-color: transparent;
   padding: 0;
+  opacity: 0;
+}
+
+.deleteButton {
+  right: -100px;
+  transition:
+    opacity 0.2s ease,
+    transform 0.1s,
+    background-color 0s,
+    color 0s;
+  transition-delay: 0s;
 }
 
 .deleteButton:hover {
@@ -131,20 +142,14 @@ tr:first-child th {
 }
 
 .editButton {
-  display: flex;
-  justify-content: flex-start;
-  position: absolute;
-  top: auto;
   left: -100px;
-
-  height: 40px;
-  width: 100px;
-  text-align: right;
-  border: none;
-  background-color: transparent;
-  padding: 0;
-
-  transition: transform 0.1s;
+  transition:
+    transform 0.1s,
+    opacity 0.2s ease,
+    transform 0.1s,
+    background-color 0s,
+    color 0s;
+  transition-delay: 0s;
 }
 
 .editButton:hover {
@@ -152,7 +157,10 @@ tr:first-child th {
 }
 
 button {
-  transition: transform 0.1s;
+  transition:
+    transform 0.1s,
+    background-color 0s,
+    color 0s;
   padding: 12px 16px;
   font-weight: bold;
 
@@ -173,10 +181,15 @@ button:hover {
 }
 
 .static-gif {
+  height: 100%;
+  width: auto;
   position: absolute;
   background: white;
 }
 
+.logo {
+  height: auto;
+}
 .static-gif:hover {
   opacity: 0;
 }
@@ -216,4 +229,5 @@ form {
 
 .project {
   width: max(70%, 100px);
+  position: relative;
 }
